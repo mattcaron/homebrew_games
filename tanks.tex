@@ -1,0 +1,125 @@
+\documentclass[11pt]{article}
+
+\usepackage[includeheadfoot,margin=0.6cm,top=0.3cm,bottom=0.6cm,headsep=0.2cm]{geometry}
+
+\usepackage{tabu}
+\usepackage[table]{xcolor}
+\usepackage{multicol}
+\usepackage{fontspec}
+\usepackage{pgffor}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+
+\usepackage{hyperref}
+% Hack to get url in blue with underline
+\hypersetup{colorlinks,urlcolor=blue,urlbordercolor=blue}
+
+\urlstyle{same}
+
+\makeatletter
+\Hy@AtBeginDocument{
+	\def\@pdfborderstyle{/S/U/W 1}
+}
+\makeatother
+
+% LaTeX counter interface for \rownum
+\makeatletter
+\@ifundefined{c@rownum}{%
+  \let\c@rownum\rownum
+}{}
+\@ifundefined{therownum}{%
+  \def\therownum{\@arabic\rownum}%
+}{}
+\makeatother
+
+% Reduce vertical spacing before and after Special Rules/Psychic title
+\titlespacing*{\subsubsection}{0pt}{1pt plus 1pt minus 1pt}{1pt plus 1pt minus 1pt}
+
+\setmainfont{Carlito}
+
+% Remove page number
+\pagenumbering{gobble}
+
+\pagestyle{fancy}
+
+\definecolor{lgrey}{rgb}{0.82, 0.82, 0.82}
+
+\newcommand{\mytitle}[1]{
+\renewcommand{\headrulewidth}{0pt}
+\setlength{\headheight}{41 pt}
+\setlength{\parskip}{1 pt}
+
+% Add an extra thick white hline at end of table to have better spacing between upgrade table
+\setlength{\arrayrulewidth}{3 pt}
+\arrayrulecolor{white}
+
+\chead{
+	\LARGE \textbf{Grimdark Future - #1}\\
+	\small by \textbf{Gaetano Ferrara} (\footnotesize\url{http://onepagerules.wordpress.com/}\small)\\
+	and  \textbf{Jocelyn Falempe} (\footnotesize\url{https://github.com/kdj0c/onepagepoints}\small)}
+}
+
+% Generate the table with all units and their stats.
+% First parameter is the page number, for faction with more than 1 page.
+\newcommand{\UnitTable}[1]{
+	\centering
+	\hyphenpenalty=100000
+	\setlength\tabcolsep{2 pt}
+	\rowcolors{1}{white}{lgrey}
+	\footnotesize
+	\begin{tabu} to \linewidth {lccX[4l]X[3l]cc}
+		\bf Name [size]& \bf Qua& \bf Def& \bf Equipment& \bf Special Rules& \bf Upgrades& \bf Cost\\
+		#1
+	\end{tabu}
+}
+
+% Generate the table for one upgrade group
+\newcommand{\UpgradeTable}[1]{
+	\hyphenpenalty=100000
+	\setlength\tabcolsep{1 pt}
+	\centering
+	\footnotesize
+	\rowcolors{1}{lgrey}{white}
+	\begin{tabu} to \linewidth {X[l]c}
+	#1 \setcounter{rownum}{0} \\ \hline%
+	\end{tabu}
+}
+
+% Start a section with special rules
+\newcommand{\specialrules}{
+	\subsubsection*{Special Rules \hfill}
+	\raggedright
+	\footnotesize
+}
+
+% All special rules should use this function.
+% First parameter is rule name.
+% Second parameter is rule explanations.
+\newcommand{\sprule}[2]{
+	\textbf{#1:} #2
+
+}
+
+% Start a section with psychic spells
+% #1 is list of spell, using \psychic
+\newcommand{\startpsychic}[1]{
+	\centering
+	\subsubsection*{Psychic Spells \hfill}
+	\raggedright
+	\hyphenpenalty=100000
+	\footnotesize
+	\tabulinesep=2pt
+	\setlength\tabcolsep{2 pt}
+	\rowcolors{1}{lgrey}{white}
+	\begin{tabu} to \linewidth {X}
+	#1
+	\end{tabu}
+}
+
+% Psychic spell templates
+% #1 is spell name
+% #2 is spell difficulty
+% #3 is spell description
+\newcommand{\psychic}[3]{
+	\textbf{#1 (#2):} #3 \\
+}
