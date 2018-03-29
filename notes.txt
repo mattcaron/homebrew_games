@@ -1,0 +1,116 @@
+Quality * X + Defense * X = Base Cost
+
+Where X = Tough(X) or else X = 1.
+
+6+ = 1pts
+5+ = 4pts
+4+ = 6pts
+3+ = 8pts
+2+ = 12pts
+
+=====
+
+Attacks * Range * Quality = Equipment Cost
+
+Melee = 0.25
+12” = 0.25
+18” = 0.375
+24” = 0.5
+30” = 0.625
+36” = 0.75
+42” = 0.875
+48” = 1
+54" = 1.125
+60" = 1.250
+66" = 1.375
+72" = 1.5
+
+Each 6" is +.125
+
+=====
+
+Only using:
+
+=== not treated as special rules, per se ===
+Fast (9" / 18") = Q
+Slow (4" / 8") = -Q
+===
+
+=== special rules ===
+
+== definite ==
+Indirect = weapon cost * 1.25
+
+== later ==
+Ambush (deploy later) = Q
+Anti-Air: (+1 vs. flyers) = calculate as qualty +0.5
+Scout (deployed after all other units, 12" away from enemies) = Q
+Sniper (+2 to hit) = calculate per unit quality 2+
+Strider (ignore difficult terrain) = Q/2
+Stealth (-1 to enemy shooting rolls) = X (where X = Tough(X)*2 or else X = 2)
+Flying = Q
+Linked (+1 to attack rolls) = calculate at quality -1???
+
+Q Lookup is based on quality:
+
+6+ = 1pts
+5+ = 4pts
+4+ = 6pts
+3+ = 8pts
+2+ = 12pts
+
+=====
+
+Weapons:
+
+We're only using straight weapon rules, bigger guns will simply roll
+more dice - it's not a "you hit" as much as a "you manage to do X
+boxes of damage".
+
+=====
+
+Vehicle effect table (optional)
+
+6 = ammo hit. Kaboom!
+5 = random weapon destroyed, else none.
+4 = immobilized - stuck for game
+3 = stunned - may not move or shoot next turn
+2 = shaken - shoot at -1 next turn
+1 = no additional effect
+
+Modifiers to target:
+
+Armor facing:
+
+Front: 0
+Sides: +1 
+Rear: +2
+
+Cover: -1
+
+Reference:
+
+Tough:
+ 1 = Armored cars
+ 2 = APC/IFV
+ 3 = Light tank
+ 6 = Medium tank
+ 9 = Heavy tank
+12 = Superheavy tank
+
+Infantry weapons are ignored - they don't even hurt armored cars.
+ 
+
+
+Rule Suggestions from Kirk:
+
+Calculated Targetting - While you may not know how many
+shots it will take to kill an enemy, your crew has a petty good
+idea. This model may fire its weapons one at a time and need not
+declare its targets ahead of time.
+
+Heavily Armored: This unit reduces the Defense penalty for facing by 1.
+
+For next edition:
+
+Once Grimdark Future v2 drops, add in the new Ambush rules.
