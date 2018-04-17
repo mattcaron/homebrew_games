@@ -9,6 +9,7 @@
 \usepackage{pgffor}
 \usepackage{fancyhdr}
 \usepackage{titlesec}
+\usepackage{makecell}
 
 \usepackage{hyperref}
 % Hack to get url in blue with underline
@@ -41,6 +42,7 @@
 % Remove page number
 \pagenumbering{gobble}
 
+
 \pagestyle{fancy}
 
 \definecolor{lgrey}{rgb}{0.82, 0.82, 0.82}
@@ -56,11 +58,12 @@
   \arrayrulecolor{white}
 
   \chead{
-    \LARGE \textbf{Grimdark Future - #1}\\
-    \small by \textbf{Gaetano Ferrara}
-    (\footnotesize\url{http://onepagerules.wordpress.com/}\small)\\
-    and \textbf{Jocelyn Falempe}
-    (\footnotesize\url{https://github.com/kdj0c/onepagepoints}\small)}
+    \LARGE \textbf{#1}\\
+    \small by \textbf{Matthew Caron}
+    (\footnotesize\url{https://www.mattcaron.net}\small)}
+
+  % Suppress default right header value.
+  \rhead{}
 }
 
 % Generate the table with all units and their stats.
@@ -71,8 +74,8 @@
   \setlength\tabcolsep{2 pt}
   \rowcolors{1}{white}{lgrey}
   \footnotesize
-  \begin{tabu} to \linewidth {lccX[4l]X[3l]cc}
-    \bf Name [size]& \bf Qua& \bf Def& \bf Equipment& \bf Special Rules& \bf Upgrades& \bf Cost\\
+  \begin{tabu} to \linewidth {lccclX[4l]X[3l]cc}
+    \bf Name & \bf Qua& \bf Def& \bf Dam & \bf Speed &\bf Equipment& \bf Special Rules& \bf Upgrades& \bf Cost\\
     #1
   \end{tabu}
 }
@@ -127,3 +130,409 @@
 \newcommand{\psychic}[3]{
   \textbf{#1 (#2):} #3 \\
 }
+
+\newcommand{\mysection}[1]{
+  \section*{\centering #1}
+  \raggedright
+  \hrule
+  \bigskip
+
+}
+\titlespacing{\section}{0pt}{*0}{*0}
+
+% Start my new heading
+% #1 is the heading.
+\newcommand{\myheading}[1]{
+  \subsubsection*{\centering #1}
+  \raggedright
+  \hrule
+}
+
+\renewenvironment{description}
+  {\list{}{\labelwidth=0pt \leftmargin=0pt
+   \let\makelabel\descriptionlabel}}
+  {\endlist}
+
+\newenvironment{mydescription}{
+\begin{description}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{description}
+}
+
+% Start my new heading
+% #1 is the heading.
+\newcommand{\myarmytitle}[1]{
+  \begin{center}
+  \Huge{\bf#1}
+  \end{center}
+  \hrule
+}
+
+
+\mytitle{TANKS! v0.1}
+\begin{document}
+
+\begin{multicols*}{2}[]
+\raggedcolumns
+
+\mysection{Acknowledgements}
+
+\begin{description}
+\item {\bf Gaetano Ferrara}
+  ({\footnotesize\url{http://onepagerules.wordpress.com/}}) - for
+  the One Page Rules project and points system.
+\item {\bf Jocelyn Falempe}
+  ({\footnotesize\url{https://github.com/kdj0c/onepagepoints}}) -
+For the \LaTeX-fu. (I totally stole your templates).
+\item {\bf Kirk Rowe} - For the editing and suggestions.
+\end{description}
+
+\mysection{Resources}
+
+The following are sources of 3D printable models for which statistics
+are provided.
+
+\begin{description}
+\item {\bf Duncan 'Shadow' Louca}
+  ({\footnotesize\url{https://www.duncanshadow.com/}})
+\item {\bf 3DWargaming} ({\footnotesize\url{https://3dwargaming.com/}})
+\end{description}
+
+\mysection{Notes}
+
+\begin{description}
+\item{\bf Mounts:} It’s assumed that all vehicles have turrets with a 360
+  degree field of fire. While not always historically accurate, it
+  keeps the game simple and fun. If it bothers you, have a house rule
+  that turretless tanks may only shoot at what their hull is facing.
+\item{\bf Infantry weapons:} This game is about tanks and other armored
+  vehicles. Infantry weapons which can’t hurt tanks are flatly
+  ignored, as are infantry themselves. All of the weapons and damage
+  values are similarly rescaled as to ignore infantry weapons. As
+  such, the units presented here are incompatible with Grimdark Future
+  units.
+\item{\bf Attacks:} Each weapon rolls a number of dice. These dice reflect
+  the damage potential of the weapon. The number of successes
+  determines just how solid the hit is. No successes means that you
+  flat missed.
+\item{\bf Aircraft:} Attack helicopters and other close support aircraft
+  are basically flying tanks. While they’re not here now, they may be
+  in the future.
+\item{\bf Units:} Each model is an individual. They are not fielded in
+  squadrons. Therefore, there is no coherency.
+
+\columnbreak
+
+\item{\bf Historical Accuracy:} There is very little, especially when you
+  compare the modern tanks against the historical ones and the science
+  fiction ones against any of them. Everything is compressed so you
+  can throw them all out on the play area and have them shoot each
+  other up.
+\item{\bf Why is everyone’s quality 4?} Because it’s a 50/50 shot roughly
+  corresponding to veteran units. For the first cut, this is just
+  about the differences in the tanks, not necessarily the crews. As
+  time progresses and things shake out and I add different weapon
+  options, I’ll likely add different quality crews as well.
+\item{\bf How do I get X added?} Email me at matt@mattcaron.net.
+\end{description}
+
+\mysection{Scale}
+\begin{description}
+\item {\bf Ground scale:} This game is designed to be played on either
+  a tabletop at reduced scale or on large floor or outside space
+  (yard/garden, sandbox, etc.) at a full scale. As such, a “unitless”
+  scale is used. It is designed to have inches used for the tabletop
+  and feet for the ground. Metric values can always be used if you
+  adjust values appropriately.
+\item{\bf Model scale:} Any model scale works as long as it doesn’t
+  look silly. 1/48 (or even larger) works for the large scale, but
+  something like 1/72 or even 1/285 works well for tabletop scale.
+\end{description}
+
+\end{multicols*}
+\pagebreak
+\begin{multicols*}{3}[]
+
+\raggedcolumns
+
+\myheading{General Principles}
+
+\begin{mydescription}
+
+\item{\bf The most important rule:} Whenever the rules are unclear or
+  don’t seem quite right, use common sense and personal
+  preference. Have fun.
+
+\item{\bf Quality Tests:} Whenever you must take a quality test, roll
+  one six-sided die trying to score the unit’s quality value or
+  higher, which counts as a success.
+
+\item{\bf Modifiers:} No modification will take a roll above a 6+. A 6
+  always succeeds. A 1 always fails.
+
+\item{\bf Line of sight:} If you can draw a straight line from
+  attacker to target without passing through any obstacle or unit,
+  then it has line of sight.
+
+\end{mydescription}
+
+\myheading{Playing the Game}
+
+The game is played in rounds in which players alternate in activating
+one unit each until all units have been activated. The player that
+deployed first starts activating first on the first round. Each new
+round the layer that finished activating first in the previous round
+gets to go first.
+
+\myheading{Activation}
+
+The player decides which unit he activates, and it may do one of the
+following:
+
+\noindent 
+\rowcolors{1}{white}{lgrey}
+\begin{tabular}{lp{2cm}p{2cm}}
+\bf{Action} & \bf{Move} & \bf{Notes} \\
+Hold & 0 & May shoot \\
+Advance & Slow: 4 \newline Normal: 6 \newline Fast: 9 & May shoot
+                                                        after moving \\
+Rush & Slow: 8 \newline Normal: 12 \newline Fast: 18 & May shoot
+                                                        after moving \\
+\end{tabular}
+
+\myheading{Movement}
+
+Models may move up to their given move value, making any number of
+turns along the way. A model may end its movement in any orientation
+(facing), but may not rotate once movement is completed.
+
+\myheading{Shooting}
+
+All models that are in range and have line of sight to an enemy model
+may fire any or all of their weapons at it. All weapons have a 360
+degree field of fire. Units may split fire by weapons, but a single
+weapon’s dice pool may not be divided. If a unit splits fire, it must
+predeclare which models are being shot with which weapon before any
+dice are rolled.
+
+Shooting models take one Quality test per attack and each success is a
+hit. For each hit, the defender rolls one die trying to score the
+target’s Defense value or higher, with each success causing a point of
+damage. Record the damage by some convenient method (a die placed on
+or near the model works well). Once the damage meets or exceeds the
+unit’s damage rating, remove the unit from the field or otherwise
+indicate its destruction.
+
+\myheading{Ramming (Optional rule)}
+
+If all players agree, a unit may make a Rush move that brings it into
+contact with another unit. This is called a ram. On a ram, both units
+make an attack on each other using a number of dice equal to their
+damage stat, as the damage roughly represents the structural integrity
+and mass of the unit. Note that BOTH attacker and defender get to make
+this roll, and it may result in simultaneous unit destruction.
+
+\myheading{Terrain}
+
+\begin{mydescription}
+
+\item{\bf Cover (forests, ruins, sandbags, etc.):} Units that shoot at
+  enemy units mostly behind cover get -1 to their shooting rolls.
+
+\item{\bf Difficult Terrain (wood, mud, rivers, etc.):} Units moving
+  through difficult terrain may not make “rush” moves.
+
+\item{\bf Dangerous Terrain (tank traps, mines, etc.):} Roll 1 die for
+  every model that moves across dangerous terrain or activates in
+  it. On a roll of 1, the model takes 1 damage.
+
+\end{mydescription}
+
+\myheading{Facing}
+
+Tank armor is thickest at the front, so facing matters. Units
+defending from an attack striking their side armor get -1 to their
+defense rolls. Units defending from an attack striking the rear of an
+enemy unit get -2 to their defense rolls.
+
+\myheading{Weapons}
+
+Weapon profiles are listed directly on the unit’s card and are
+represented like this:
+
+\begin{itemize}
+
+\item Name (Range, Attacks, Special Rules)
+
+\end{itemize}
+
+\columnbreak
+
+\myheading{Special Rules}
+
+\begin{mydescription}
+
+\item{\bf Anti-Air:} This weapon gets +1 to its shooting rolls against
+  enemy Flyers.
+
+\item{\bf Flying:} This model may move through other units and
+  obstacles and it may ignore terrain effects.
+
+\item{\bf Indirect:} This model may be fired at enemies that are not
+  within line of sight. Targets not within line of sight count as
+  being in cover.
+
+\item{\bf Linked:} This weapon gets +1 to its attack rolls.
+
+\item{\bf Scout:} This model is deployed after all other units have
+  been deployed. Scout units may be placed anywhere over 12 away from
+  enemies. If both players have scout units, the players must roll off
+  to see who deploys first.
+
+\item{\bf Sniper:} Models firing this weapon count as having Quality
+  2+ and ignore cover.
+
+\item{\bf Stealth:} Enemies get -1 to their shooting rolls against
+  this unit.
+
+\item{\bf Strider:} This model may make Rush moves through difficult
+  terrain.
+
+\end{mydescription}
+
+\myheading{Hit Effects (Optional rule)}
+
+If all players agree, every time a unit takes damage roll on the
+following table for each damage source (that is, if you take 3 damage
+from a single source, you roll once, not 3 times).
+
+\noindent 
+\rowcolors{1}{white}{lgrey}
+\begin{tabular}{lp{5cm}}
+\bf{Roll} & \bf{Effect} \\
+6 & Ammo cooks off. Kaboom! Unit destroyed. \\
+5 & Random weapon destroyed. If none left, unit destroyed. \\
+4 & Immobilized for rest of game. If already immobilized, weapon
+    destroyed. \\
+3 & Stunned. May not move or shoot next turn. \\
+2 & Shaken. May not shoot next turn. \\
+1 & No additional effect.\\
+
+\end{tabular}
+
+\end{multicols*}
+
+\newpage
+
+\myarmytitle{Duncan's stuff}
+
+\UnitTable{
+
+  AFV & 4+ & 5+ & 1 & Fast & \makecell[l]{Linked Light Cannons(36,
+    A2, Linked)} & Scout & & 34 pts\\
+
+  Tank & 4+ & 3+ & 6 & Normal & \makecell[l]{Heavy Cannon(72,
+    A6),\\Plasma Cannon(48, A4)} & & & 138 pts\\
+
+  APC & 4+ & 5+ & 2 & Normal & \makecell[l]{Tribarrel Cannon(24,
+    A1)} & & & 23 pts\\
+
+  Self-Propelled Howitzer & 4+ & 6+ & 2 & Normal &
+  \makecell[l]{Howitzer(72, A6, Indirect)} & & & 95 pts\\
+
+  Rocket Artillery & 4+ & 5+ & 2 & Normal & \makecell[l]{Rocket
+    Barrage(60, A6, Indirect)} & & &	88 pts\\
+
+  Quad Laser & 4+ & 5+ & 3 & Normal & \makecell[l]{Quad Laser(48,
+    A4)} & & & 54 pts\\
+
+  Field Howitzer & 4+ & 6+ & 1 & Slow & \makecell[l]{Howitzer(72,
+    A6, Indirect)} & & & 82 pts\\
+
+  Field Mortar (Light) & 4+ & 6+ & 1 & Slow & \makecell[l]{Light
+    Mortar(48, A3, Indirect}) & & & 28 pts\\
+
+  Scout Walker & 4+ & 5+ & 1 & Fast & \makecell[l]{Plasma Cannon(48,
+    A4)} & Scout & & 46 pts \\
+
+  Field Mortar (Heavy) & 4+ & 6+ & 1 & Slow & \makecell[l]{Heavy
+    Mortar(48, A6, Indirect)} & & & 55 pts\\
+
+  Siege Tank & 4+ & 5+ & 3 & Slow & \makecell[l]{Siege Cannon(24, A9)}
+  & & & 51 pts\\
+
+  MKII AFV & 4+ & 5+ & 2 & Fast &  \makecell[l]{Linked Light Cannons(36,
+    A2, Linked)} & Scout & & 44 pts\\
+
+  MKII Light Tank & 4+ & 4+ & 3 & Normal & \makecell[l]{Medium
+    Cannon(48, A4)} & & & 60 pts\\
+
+  MKII Rocket Launcher (ATGM) & 4+ & 5+ & 3 & Fast &
+  \makecell[l]{ATGM(60, A6)} & & & 81 pts\\
+
+  Heavy Tank & 4+ & 2+ & 9 & Slow & \makecell[l]{Linked Heavy Cannon(72,
+    A6, Linked)} & & & 228 pts\\
+
+  Heavy Tank Tank Hunter & 4+ & 2+ & 9 & Slow & \makecell[l]{High
+    Velocity Heavy Cannon(72, A9)} & & & 237 pts\\
+
+}
+
+\newpage
+
+\myarmytitle{3D Wargaming's stuff}
+
+\UnitTable{
+
+
+  Formic AWC w/ ATGM & 4+ & 5+ & 2 & Normal & \makecell[l]{ATGM (60,
+    A6)} & & & 65 pts\\
+
+  Pillar MBT & 4+ & 3+ & 6 & Normal & \makecell[l]{Heavy Cannon (72, A6)} & &
+  & 138 pts\\
+
+  Guardian APC & 4+ & 5+ & 2 & Fast & \makecell[l]{Autocannon (36,
+    A1)} & & & 31 pts\\
+
+  Marauder Light Tank & 4+ & 4+ & 3 & Normal & \makecell[l]{Light
+    Cannon (48, A4)} & & & 60 pts\\
+
+  Lux Sentinel & 4+ & 4+ & 2 & Normal & \makecell[l]{Laser Cutter (24,
+    A3)} & & & 33 pts\\
+
+  Lux Occuli & 4+ & 3 & 1 & Fast & \makecell[l]{Laser Cutter (24,
+    A3)} & & & 29 pts\\
+
+  Gleam Occuli & 4+ & 3+ & 1 & Fast & \makecell[l]{Laser Blaster (12,
+    A6)} & & & 29 pts\\
+
+  Tiger Ausf E & 4+ & 3+ & 7 & Slow & \makecell[l]{8.8cm cannon (60,
+    A5)} & & & 130 pts\\
+
+  Panther Ausf D & 4+ & 4+ & 5 & Normal & \makecell[l]{7.5cm cannon
+    (48, A4)} & & & 84 pts\\
+
+  Panzer IV Ausf G & 4+ & 4+ & 4 & Normal & \makecell[l]{7.5 cm
+    cannon (30, A4)} & & & 63 pts\\
+
+  StuG IV & 4+ & 4+ & 4 & Normal & \makecell[l]{7.5 cm cannon (30,
+    A4)} & & & 63 pts\\
+
+  Su-100 & 4+ & 4+ & 4 & Normal & \makecell[l]{100mm cannon (60,
+    A5)} & & & 86 pts\\
+
+  T-34/76 & 4+ & 5+ & 4 & Normal & \makecell[l]{76mm cannon (30,
+    A3)} & & & 51 pts\\
+
+  T-34/85 & 4+ & 4+ & 4 & Normal & \makecell[l]{85mm cannon (48,
+    A4)} & & & 72 pts\\
+  
+  Sherman & 4+ & 5+ & 3 & Normal & \makecell[l]{75mm cannon (30,
+    A3)} & & & 41 pts\\
+
+  Sherman Firefly & 4+ & 5+ & 3 & Normal & \makecell[l]{76.2mm cannon
+    (48, A4)} & & & 54 pts\\
+
+}
+\end{document}
