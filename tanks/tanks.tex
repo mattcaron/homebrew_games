@@ -2,7 +2,7 @@
 
 \usepackage[includeheadfoot,margin=0.6cm,top=0.3cm,bottom=0.6cm,headsep=0.2cm]{geometry}
 
-\usepackage{tabu}
+\usepackage{tabularx}
 \usepackage[table]{xcolor}
 \usepackage{multicol}
 \usepackage{fontspec}
@@ -74,10 +74,10 @@
   \setlength\tabcolsep{2 pt}
   \rowcolors{1}{white}{lgrey}
   \footnotesize
-  \begin{tabu} to \linewidth {lccclX[4l]X[3l]cc}
+  \begin{tabularx}{\linewidth}{lccclXXcc}
     \bf Name & \bf Qua& \bf Def& \bf Dam & \bf Speed &\bf Equipment& \bf Special Rules& \bf Upgrades& \bf Cost\\
     #1
-  \end{tabu}
+  \end{tabularx}
 }
 
 % Generate the table for one upgrade group
@@ -87,9 +87,9 @@
   \centering
   \footnotesize
   \rowcolors{1}{lgrey}{white}
-  \begin{tabu} to \linewidth {X[l]c}
+  \begin{tabularx}{\linewidth}{Xlc}
     #1 \setcounter{rownum}{0} \\ \hline%
-  \end{tabu}
+  \end{tabularx}
 }
 
 % Start a section with special rules
@@ -118,9 +118,9 @@
   \tabulinesep=2pt
   \setlength\tabcolsep{2 pt}
   \rowcolors{1}{lgrey}{white}
-  \begin{tabu} to \linewidth {X}
+  \begin{tabularx}{\linewidth}{X}
     #1
-  \end{tabu}
+  \end{tabularx}
 }
 
 % Psychic spell templates
