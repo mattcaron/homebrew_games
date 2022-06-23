@@ -42,24 +42,21 @@ between 200m and 300m, so we'll need to make use of that range band as well.
 
 ## Movement scale
 
-Given the above, and assuming a turn represents approximately 5 minutes (giving
-us engagements lasting 20 minutes to half an hour, given a 4-6 turn game, which
-seems reasonable), if we take the basic rules for small scales from the full
-rulebook, we get a base infantry movement of 3", which translates to 250m. Given
-an average adult human pace of walking at 1m/s for a casual stroll, we'd be able
-to cross 500m in 5 minutes. Factor in being shot at, a bit of cautious movement
-and broken ground, and a 250m move in 5 minutes (or 500m at a run) becomes
-perfectly reasonable.
+I had a whole, well thought out, proper rationale for this, and then I realized
+that none of it really mattered. Basically, infantry is Slow and its movement is
+halved, and everything else doubles from there.
 
-Pivoting to vehicles, which are almost always Fast, with a movement of 9 / 18 in
-the original scale, which is halved to 4.5 (rounded to 5) and 9 as a result of
-the scale conversion. As a first change, I'm going to change the rush to 10, so
-that it is double the base movement, just to keep things easy). This means that,
-flat out, a vehicle will be moving 800m in 5 minutes, which equates to 9.6kph
-(assuming I can math). Given that a T-55 has an average cross country speed of
-25kph (See https://www.globalsecurity.org/military/world/russia/t-54-specs.htm),
-and it is a relatively slow vehicle, I'm not worried that this is
-unrealistically fast - if anything, we might be disadvantaging faster vehicles.
+| Speed  | Advance | Rush / Charge |
+| ------ | ------- | ------------- |
+| Slow   |   2"    |      4"       |
+| Normal |   4"    |      8"       |
+| Fast   |   6"    |      12"      |
+
+## Towed
+
+Towed vehicles are assumed to not move the whole game. After all, if the game is
+only 20 - 30 minutes of real world time, there's not a lot of time to limber and
+unlimber your towed artillery in the middle of the game.
 
 ## Armor and small arms
 
@@ -76,6 +73,8 @@ infantry, especially if they let the infantry get within 3".
 
 ## Melee combat
 
+TL;DR - We use the melee rules, but you can use all the unit's weapons in melee.
+
 In the time period covered by these rules, swords are not a thing in any
 practical sense, and pistols are typically used as backup weapons, by officers,
 and by vehicle crew. As such, neither are really represented in game - it's all
@@ -89,8 +88,8 @@ range and 5 minutes of movement.
 
 As a result, melee combat represents more of a close range firefight and
 therefore the "determine attacks" phase of melee combat is the same as that of
-ranged combat, as the charging unit fights with all their small arms. The
-principal difference is that the defending unit gets to shoot back.
+ranged combat, as the charging unit fights with all their small arms. The same
+holds true for the defender.
 
 Further, the principal CCW in this ruleset will end up being the submachine gun,
 as it is more compact and manueverable in close quarters, but the tradeoff for
@@ -180,15 +179,18 @@ similar. As such, much like the reference table on page 12 of the Points
 Calculator, we end up with the following table of common infantry and light
 support weapons:
 
-| Weapon                                      | Stats          | Base Cost |
-| ------                                      | -----          | --------- |
-| Infantry Rifle (M16/M4, AK series, FAL, G3) | 6" , A1        | 0.125     |
-| Squad Automatic Weapon (M249, RPD, RPK)     | 6", A3         | 0.375     |
-| Medium Machinegun (M240, PKM)               | 12", A3        | 0.75      |
-| Heavy Machinegun (M2, DSHK, Kord)           | 24", A3, AP(1) | 2.25      |
+| Weapon                                      | Stats          |
+| ------                                      | -----          |
+| Infantry Rifle (M16/M4, AK series, FAL, G3) | 6", A1         |
+| Squad Automatic Weapon (M249, RPD, RPK)     | 6", A3         |
+| Medium Machinegun (M240, PKM)               | 12", A3        |
+| Heavy Machinegun (M2, DSHK, Kord)           | 24", A3, AP(1) |
 
 There are some variations in ammunition in the above (tracer, armor piercing,
 etc.) but such variations have minimal impact at this game scale.
+
+Note that the above are cumulative, so a stand with a squad of 4 people all with
+infanty rifles would be statted as (6", A4).
 
 Once you get into larger bore guns (around 20mm and up) then you start to see
 serious differences in weapon performance based on differences in ammunition.
@@ -326,3 +328,67 @@ The following quality guidelines apply, and are consistent with those from the P
 
 As is recommended, quality 6+ and 2+ will be sparingly used - for militia mobs
 and high military honors winners, respectively.
+
+## Force organization
+
+This is tricky because it's not always an even multiple. Generally speaking,
+when coming up with these lists, I've:
+
+1. Ignored command elements. They're just a pain, because it's maybe 1-3
+   additional personnel who command and run the radio, but they're leading 3
+   elements of 4 people each, so how do I write that up? It just gets messy.
+
+1. Made elements identical. It's not uncommon for there to be one guy in one of
+   the, say 3 stands to have something like an antitank launcher or something -
+   but then we need to track which of the stands is that special one, and it's
+   just a pain. So, give each stand an antitank launcher - less bookkeeping.
+
+1. Therefore, given the above, we assume that any unit is lead by some officer
+   that is there, but not necessarily modeled directly (though, you could).
+
+## The battle cry special rule
+
+If you're just playing G.I. Joe vs. Cobra, it cancels out, but if Cobra ever
+fought, say, he 1980's U.S. Marine Corps, it needs some special costing. So, I
+figured that the battle cry lets you reroll for a whole turn, basically giving
+you a "do over", right? Well, that's almost like an extra turn, and if there are
+6 turns (normally), that's 16%, so just multiply any unit in an army that can
+use that rule by 1.16. Seems sane.
+
+## Specific army / unit notes
+
+### G.I. Joe
+
+* Based on the cartoon series voice over, which states that "G.I. Joe is the
+  codename for America's daring, highly trained, special mission force.", we
+  assume that G.I. Joe's baseline "greenshirts" are equivalent to the elite
+  special forces of several militaries (Quality 2+). Despite the cartoon
+  depictions, however, we assume that they have some body armor as well (Defense
+  5+).
+* The named heroes would be assumed to be even better than the greenshirts, so
+  would be quality 2+ if individually modeled. However, they are squad / vehicle
+  upgrades in this game, so their effects are different.
+* According to <https://gijoe.fandom.com/wiki/A.P.C>, the A.P.C. had either a
+  50mm cannon or a 105mm cannon. I don't buy the 105mm mounted on a transport,
+  so I'm going to go with the 50mm.
+* The Dragonfly XH-1 has all the standard stuff one would expect on a Cobra, but
+  also adds some X-551 mini-cannons and an M-34 grenade launcher. I can't find
+  anything about these actually being real items, so I'm going to assume that
+  the X-551 is a 7.62mm minigun type weapon system (as are commonly used in
+  aircraft applications) and the M-34 is a standard belt fed automatic grenade
+  launcher. Both of these would likely be used for area suppression of infantry.
+* I have no idea what to do about the M.A.N.T.A., because there's not much in
+  the way of amphibious operations in this game.
+
+### Cobra
+
+* Based on their depiction in the cartoon, we assume that Cobra's standard
+  troopers are trained but inexperienced (Quality 5+) soldiers with no body
+  armor save a pair of fashion forward suspenders (Defense 6+).
+
+* I didn't do anything specific with the Cobra officer, because we assume that
+  officers are organically mixed into units (even if not represented on stands).
+
+* According to <https://gijoe.fandom.com/wiki/H.I.S.S> the H.I.S.S. had either
+  30mm or 90mm cannons. I'm going to go with 30mm cannons for the APC and 90mm
+  cannons for the tank.

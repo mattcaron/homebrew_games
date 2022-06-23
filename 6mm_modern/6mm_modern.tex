@@ -1,0 +1,577 @@
+\documentclass[11pt]{article}
+
+\usepackage[includeheadfoot,margin=0.6cm,top=0.3cm,bottom=0.6cm,headsep=0.2cm]{geometry}
+
+\usepackage{tabularx}
+\usepackage[table]{xcolor}
+\usepackage{multicol}
+\usepackage{fontspec}
+\usepackage{pgffor}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{makecell}
+
+\usepackage{hyperref}
+% Hack to get url in blue with underline
+\hypersetup{colorlinks,urlcolor=blue,urlbordercolor=blue}
+
+\urlstyle{same}
+
+\makeatletter
+\Hy@AtBeginDocument{
+  \def\@pdfborderstyle{/S/U/W 1}
+}
+\makeatother
+
+% LaTeX counter interface for \rownum
+\makeatletter
+\@ifundefined{c@rownum}{%
+  \let\c@rownum\rownum
+}{}
+\@ifundefined{therownum}{%
+  \def\therownum{\@arabic\rownum}%
+}{}
+\makeatother
+
+% Reduce vertical spacing before and after Special Rules/Psychic title
+\titlespacing*{\subsubsection}{0pt}{1pt plus 1pt minus 1pt}{1pt plus
+  1pt minus 1pt}
+
+\setmainfont{Carlito}
+
+% Remove page number
+\pagenumbering{gobble}
+
+
+\pagestyle{fancy}
+
+\definecolor{lgrey}{rgb}{0.82, 0.82, 0.82}
+
+\newcommand{\mytitle}[1]{
+  \renewcommand{\headrulewidth}{0pt}
+  \setlength{\headheight}{41 pt}
+  \setlength{\parskip}{1 pt}
+
+  % Add an extra thick white hline at end of table to have better
+  % spacing between upgrade table
+  \setlength{\arrayrulewidth}{3 pt}
+  \arrayrulecolor{white}
+
+  \chead{
+    \LARGE \textbf{#1}\\
+    \small by \textbf{Matthew Caron}
+    (\footnotesize\url{https://www.mattcaron.net}\small)}
+
+  % Suppress default right header value.
+  \rhead{}
+}
+
+% Generate the table with all units and their stats.
+% First parameter is the page number, for faction with more than 1 page.
+\newcommand{\UnitTable}[1]{
+  \centering
+  \hyphenpenalty=100000
+  \setlength\tabcolsep{2 pt}
+  \rowcolors{1}{white}{lgrey}
+  \footnotesize
+  \begin{tabularx}{\linewidth}{lcc>{\hsize=1.4\hsize\linewidth=\hsize}X>{\hsize=.6\hsize\linewidth=\hsize}Xcc}
+    \bf Name & \bf Qua & \bf Def & \bf Equipment & \bf Special Rules & \bf
+    Upgrades & \bf Cost\\
+    #1
+  \end{tabularx}
+}
+
+% Generate the table for one upgrade group
+\newcommand{\UpgradeTable}[1]{
+  \hyphenpenalty=100000
+  \setlength\tabcolsep{1 pt}
+  \centering
+  \footnotesize
+  \rowcolors{1}{lgrey}{white}
+  \begin{tabularx}{\linewidth}{Xlc}
+    #1 \setcounter{rownum}{0} \\ \hline%
+  \end{tabularx}
+}
+
+% Start a section with special rules
+\newcommand{\specialrules}{
+  \subsubsection*{Special Rules \hfill}
+  \raggedright
+  \footnotesize
+}
+
+% All special rules should use this function.
+% First parameter is rule name.
+% Second parameter is rule explanations.
+\newcommand{\sprule}[2]{
+  \textbf{#1:} #2
+
+}
+
+% Start a section with psychic spells
+% #1 is list of spell, using \psychic
+\newcommand{\startpsychic}[1]{
+  \centering
+  \subsubsection*{Psychic Spells \hfill}
+  \raggedright
+  \hyphenpenalty=100000
+  \footnotesize
+  \tabulinesep=2pt
+  \setlength\tabcolsep{2 pt}
+  \rowcolors{1}{lgrey}{white}
+  \begin{tabularx}{\linewidth}{X}
+    #1
+  \end{tabularx}
+}
+
+% Psychic spell templates
+% #1 is spell name
+% #2 is spell difficulty
+% #3 is spell description
+\newcommand{\psychic}[3]{
+  \textbf{#1 (#2):} #3 \\
+}
+
+\newcommand{\mysection}[1]{
+  \section*{\centering #1}
+  \raggedright
+  \hrule
+  \bigskip
+
+}
+\titlespacing{\section}{0pt}{*0}{*0}
+
+% Start my new heading
+% #1 is the heading.
+\newcommand{\myheading}[1]{
+  \subsubsection*{\centering #1}
+  \raggedright
+  \hrule
+}
+
+\renewenvironment{description}
+  {\list{}{\labelwidth=0pt \leftmargin=0pt
+   \let\makelabel\descriptionlabel}}
+  {\endlist}
+
+\newenvironment{mydescription}{
+\begin{description}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{description}
+}
+
+% Start my new heading
+% #1 is the heading.
+\newcommand{\myarmytitle}[1]{
+  \begin{center}
+  \Huge{\bf#1}
+  \end{center}
+  \hrule
+}
+
+
+\mytitle{6mm Modern v0.1}
+\begin{document}
+
+\begin{multicols*}{3}[]
+\raggedcolumns
+
+\mysection{Acknowledgements}
+
+\begin{description}
+\item {\bf Gaetano Ferrara}
+  ({\footnotesize\url{https://onepagerules.com/}}) - for
+  the One Page Rules project and points system.
+\item {\bf Jocelyn Falempe}
+  ({\footnotesize\url{https://github.com/kdj0c/onepagepoints}}) -
+For the \LaTeX-fu. (I totally stole your templates).
+\item {\bf Hasbro} for creating G.I. Joe. G.I. Joe is a registered trademark of
+Hasbro, Inc. and is used without permission in a fan project. No infringement on
+their intellectual property is intended - I just like the IP and want to fight
+battles from the cartoon show.
+\item {\bf Military service members worldwide} We play at this. You do it for
+real. Respect.
+\end{description}
+
+\mysection{Crosslinks}
+
+You can find 3D printable models for most of the army list entries in a separate
+GitHub repository here:
+
+\href{https://github.com/mattcaron/6mm_remixes}{https://github.com/\\mattcaron/6mm\_remixes}
+
+\mysection{Notes}
+
+\begin{description}
+\item{\bf Basing} Use whatever basing you like (or none at all for vehicles). I
+tend to use:
+  \begin{itemize}
+    \item 1" x 1" - Infantry bases.
+    \item 1" x 1.5" - Light Tanks, IFVs, etc.
+    \item 1" x 1.75" - Medium Tanks
+    \item 1" x 2" - Heavy Tanks
+  \end{itemize}
+\end{description}
+
+\mysection{Scale}
+\begin{description}
+\item {\bf Ground scale:} This game is designed to be played on a 4' x 4' table
+or larger.  It is based off 12" = 1km, which ends up with 1" = 83m (not that
+this is particularly relevant).
+\item{\bf Model scale:} As the name implies, this is designed to be played with
+standard 6mm / 1/285 / 1/300 models (often called Microarmor).
+\end{description}
+
+\mysection{Rules}
+
+These rules are a modification of the OnePageRules Grimdark Future rules, which
+can be downloaded at \url{https://onepagerules.com/portfolio/grimdark-future/},
+with the following modifications:
+
+\myheading{Models}
+
+To be abundantly clear, in these rules a Model is an individual vehicle (based
+or not) or a collectively based fighting element (squad, section, etc) of
+infantry. As is true in the main rules, Models are grouped into Units.
+
+\myheading{Movement}
+
+Movement distances are as follows:
+
+\begin{mydescription}
+
+\item{\bf Advance:} The unit moves up to 4" and may shoot after moving.
+\item{\bf Rush:} The unit moves up to 8" and may not shoot.
+\item{\bf Charge:} The unit moves up to 8" to get into base contact with the
+enemy.
+
+\end{mydescription}
+
+\myheading{Melee}
+
+Melee combat is modified in that the Determine Attacks phase uses all weapons,
+not just melee weapons. (The logic here is that, at this scale, it's more of a
+close range firefight than a true hand to hand combat). All other melee combat
+resolution steps remain unchanged.
+
+\mysection{Special Rules}
+
+The special rules are used as written, except as noted below:
+
+\myheading{Aircraft}
+
+Non-Aircraft models that shoot at Aircraft count as being an extra 6" away when
+measuring and get –1 to their to hit rolls.
+
+\smallskip
+
+When an Aircraft is activated it must move a full 9" to 18" in a straight line.
+
+\myheading{Ambush}
+
+At the beginning of any round after the first you may place the model anywhere
+on the table over 5" away from enemy units.
+
+\myheading{Blast(X)}
+
+Blast can deal more than one hit in the target unit if that unit is a stand of infantry.
+
+\myheading{Fast}
+
+Fast units move 6" when using Advance actions and 12" when using Rush or Charge
+actions.
+
+\myheading{Hero}
+
+Given the collective nature of stands in this game (a squad, a tank (and crew),
+etc.) heroes are effectively upgrades to all models in a single unit - the idea
+being that the hero's presence spurs the unit on to greater heroic feats, it is
+a specialized unit led by that hero, or something similar. Note that you can
+only have one of these heroes {\bf in the whole army}. (You can only have one
+Snake Eyes).
+
+The hero should be represented by a differently painted figure on a stand or
+individual vehicle.
+
+\myheading{Heroes and Combined Units}
+
+If a player uses the Combined Units rule (buying two copies of a unit), both
+units must pay the cost of the hero upgrade despite there only being one hero
+vehicle / stand (this keeps the game fair).
+
+\myheading{Infantry}
+
+Models denoted as Infantry are Infantry. This is not a special rule, it just
+means that they are vulnerable to Blast(X) weapons. (See Blast(X) rule, above.)
+
+\myheading{Scout}
+
+After all other units have been deployed models with scout may be deployed and
+then moved by up to 6”, ignoring terrain.
+
+\myheading{Slow}
+
+Units with this special rule move 2" when using Advance actions and 4" when
+using Rush or Charge actions.
+
+\myheading{Transport}
+
+... embarked units may use any action to disembark but only move up to 2".
+
+Additionally, the stated transport capacity is the number of Infantry stands which can be carried.
+
+\newpage
+
+\mysection{Optional Rules}
+
+All of the optional rules should work just fine as long as you halve the ranges
+(round up), but the following rules are modified:
+
+\myheading{Extra Actions: Overwatch}
+
+The following changes are made to the Overwatch action:
+
+\begin{itemize}
+
+\item An individual model may hold an action; the entire unit does not have to
+(this allows one vehicle in a unit to provide air defense while the others fire
+for effect).
+\item The shooting reaction distance is reduced to 12".
+
+\end{itemize}
+
+\myheading{Suppression}
+
+Suppression is changed as follows:
+
+\begin{itemize}
+  \item Under {\bf Using Suppression}: Whenever a friendly unit within 3" is
+  destroyed or routs after losing melee.
+  \item Under {\bf Heroic Inspiration}: "and from all other friendly
+  units within 6” (this doesn’t require any rolls)."
+\end{itemize}
+
+\mysection{Recommended Optional Rules}
+
+The following optional rules are highly recommended:
+
+\begin{itemize}
+  \item Extra Actions: Overwatch
+  \item Suppression
+\end{itemize}
+
+\mysection{Further Modifications}
+
+\myheading{Splitting Fire}
+
+As it is now very common for models to have multiple weapon systems (multiple
+soldiers aggregated together, vehicles with multiple weapons, etc.) models may
+now split fire between different target units as long as the split is based on
+discrete weapons systems. You cannot split dice from the same machinegun across
+two different targets, for example.
+
+\mysection{Notational Changes}
+
+\myheading{Basing}
+
+In addition to the standard [X] nomenclature, I have prepended an (N)
+nomenclature to entries. Given the following entry:
+
+{\bf M1 Abrams (1)[4]}
+
+This should be read as 4 tanks, 1 per base (a platoon). Given this one:
+
+{\bf Fire Team (4)[2]}
+
+That is to be read as 2 stands of infantry, 4 soldiers per base (a U.S. Army
+Squad, comprised of 2 fire teams.). Conversely, a U.S. Marine squad of 3 bases
+of 4 soldiers would look like this:
+
+{\bf Fire Team (4)[3]}
+
+\end{multicols*}
+
+\newpage
+
+\myarmytitle{G.I. Joe}
+
+\UnitTable{
+
+  Greenshirt Squad (4)[2] & 3+ & 5+ & \makecell[l]{Infantry Rifles (6",
+    A4)} & Infantry, Slow, Tough(4) & A & 100pts\\
+  A.P.C. Section (1)[2] & 3+ & 5+ & \makecell[l]{50mm cannon (24", A1, AP(3),
+  Deadly(3))} & Fast, Tough(3), Transport(2) & & 215pts \\
+  Dragonfly XH-1 Section (1)[2] & 3+ & 4+ &\makecell[l]{
+  25mm chain gun (24", A3, AP(2))\\
+  Sidewinder missiles (24", A1, Anti-Air, AP(3), Deadly(3)) \\
+  Rocket pods (12", A2, Blast(3)) \\
+  X-551 Mini cannons (12", A12) \\
+  M-34 Grenade launcher (6", A2, Blast(3)) } & Fast, Flying, Tough(3) & B & 335pts \\
+  F.L.A.K. Battery (3)[2] & 3+ & 5+ & \makecell[l]{F.L.A.K. cannon (12", A3,
+    Anti-Air, Blast(3))} & Immobile, Infantry, Tough(3) & & 80pts\\
+  H.A.L. Battery (2)[3] & 3+ & 5+ & \makecell[l]{Heavy Artillery Laser (18", A2,
+    AP(4), Deadly(3))} & Immobile, Infantry, Tough(2) & C & 125pts\\  
+  Headquarters Command Center & 3+ & 2+ & \makecell[l]{
+  .50 Cal. MG (24", A3, AP(1)) \\
+  .50 Cal. MG (24", A3, AP(1)) \\
+  Twin Anti-Tank gun (48", A2, AP(4), Deadly(6)) \\
+  Flamethrower (A6) \\
+  } & Immobile, Tough(24) & & 1615pts\\ 
+  M.M.S. Battery (2)[3] & 3+ & 5+ & \makecell[l]{Raytheon MIM-23 HAWK missiles
+  \\ (24", A2, Anti-Air, AP(3), Deadly(3))} & Immobile, Infantry, Tough(2) & D & 175pts\\ 
+  M.O.B.A.T Section (1)[2] & 3+ & 2+ & \makecell[l]{130mm Cannon (48", A1,
+  AP(4), Deadly(6)) \\ .50 Cal. MG (24", A3, AP(1))} & Tough(9) & E & 680pts\\ 
+  P.A.C./R.A.T. Unit (3)[1] & 5+ & 5+ & \makecell[l]{
+    Quad Machineguns (12", A12) \\
+    Flamethrower (A6) \\
+    Missile Launcher (12", A1, Anti-Air, AP(3), Deadly(3))
+  } & Slow, Tough(6) & & 105pts\\ 
+  Polar Battle Bear Section (2)[2] & 3+ & 5+ & \makecell[l]{
+    Twin Machineguns (12", A12) \\
+    Rockets (12", A2, Blast(3)) } & Fast, Infantry, Tough(2) & & 160pts\\ 
+  R.A.M. Section (2)[2] & 3+ & 5+ & \makecell[l]{Gatling Gun (12", A12)} & Fast,
+  Infantry, Tough(2) & F & 130pts\\ 
+  Skystriker XP-14F Flight & 3+ & 4+ & \makecell[l]{
+  20mm Cannon (24", A6, AP(2), Deadly(2))\\
+  Missiles (36", A1, Anti-Air, AP(3), Deadly(3))} & Aircraft, Tough(6) & G & 465pts\\
+  V.A.M.P. Section (1)[2] & 3+ & 4+ & \makecell[l]{Twin Machine Guns (24", A6,
+  AP(1))} & Fast, Scout, Tough(3) & H & 220pts\\ 
+  Whirlwind Battery (2)[3] & 3+ & 5+ & Twin Gatling Gun (12", A24, Anti-Air) &
+  Immobile, Infantry, Tough(2) & & 200pts \\
+  Wolverine Section (1)[2] & 3+ & 3+ & ATGM (24", A1, AP(3), Deadly(3)) & Fast,
+  Tough(6) & I & 290pts \\
+
+}
+
+\begin{multicols*}{3}[]
+
+  \UpgradeTable{
+    \multicolumn{2}{p{\dimexpr \linewidth - 2pt \relax}}
+    {\bf A | Upgrade unit with one of: } & \\
+      Hero - Airborne (Ambush) & +20pts \\
+      Hero - Breaker (??) & +XXpts \\
+      \makecell[l]{Hero - Flash (Replace Infantry Rifles with\\ Laser Rifles
+      (6", A4, AP(4))} & +20pts \\
+      Hero - Doc (Regeneration) & +60pts \\
+      Hero - Duke (Quality 2+) & +35pts \\
+      Hero - Grunt (Fearless) & +40pts \\
+      Hero - Gung-Ho (Strider) & +10pts \\
+      \makecell[l]{Hero - Rock n' Roll (Replace Infantry Rifles\\ with SAWs (6",
+      A12))} & +20pts \\
+      \makecell[l]{Hero - Scarlett (Melee Combat Training \\ (Add A4, Deadly(2),
+      Stealth))} & +35pts \\
+      Hero - Short-Fuze (Replace Infantry Rifles with Mortars (12", A2,
+      Blast(3), Indirect)) & +30pts \\
+      Hero - Snake-Eyes (Impact(4), Stealth) & +40pts \\
+      Hero - Snowjob (Sniper) & +10pts \\
+      Hero - Stalker (Scout) & +20pts \\
+      Hero - Torpedo (??) & +XXpts \\
+      Hero - Tripwire (Add Explosives(A1, AP(3), Deadly(3))) & +25pts \\
+      \makecell[l]{Hero - Zap (Replace Infantry Rifles \\ with Anti-Tank Weapons
+      \\ (6", A4, AP(3), Deadly(3)))} & +40pts \\
+    {\bf Upgrade unit with one of:} & \\
+       J.U.M.P. Jetpack (Flying) & +20pts \\
+       Falcon Glider (Ambush) & +20pts}
+
+  \UpgradeTable{
+    \multicolumn{2}{p{\dimexpr \linewidth - 2pt \relax}}
+    {\bf B | Upgrade unit with: } & \\
+      Hero - Wild Bill (Relentless) & +25pts}
+
+  \UpgradeTable{
+    \multicolumn{2}{p{\dimexpr \linewidth - 2pt \relax}}
+    {\bf C | Upgrade unit with: } & \\
+      Hero - Grand Slam (Increase range to 24") & +40pts}
+
+  \UpgradeTable{
+    \multicolumn{2}{p{\dimexpr \linewidth - 2pt \relax}}
+    {\bf D | Upgrade unit with: } & \\
+      Hero - Hawk (Increase to AP(4)) & +85pts}
+
+  \UpgradeTable{
+    \multicolumn{2}{p{\dimexpr \linewidth - 2pt \relax}}
+    {\bf E | Upgrade unit with: } & \\
+      Hero - Steeler (Ambush) & +20pts} 
+      
+  \UpgradeTable{
+    \multicolumn{2}{p{\dimexpr \linewidth - 2pt \relax}}
+    {\bf F | Upgrade unit with: } & \\
+    \makecell[l]{Hero - Rock n' Roll (Replace Gatling Gun \\ with High Speed
+      Gatling Gun (12", A24))} & +55pts}      
+
+  \UpgradeTable{
+    \multicolumn{2}{p{\dimexpr \linewidth - 2pt \relax}}
+    {\bf G | Upgrade unit with: } & \\
+      Hero - Ace (Unit quality 2+) & +175pts}
+
+  \UpgradeTable{
+    \multicolumn{2}{p{\dimexpr \linewidth - 2pt \relax}}
+    {\bf H | Upgrade unit with: } & \\
+      Hero - Clutch (Strider) & +5pts}
+
+  \UpgradeTable{
+    \multicolumn{2}{p{\dimexpr \linewidth - 2pt \relax}}
+    {\bf I | Upgrade unit with: } & \\
+      Hero - Cover Girl (Regeneration) & +80pts}      
+
+  \specialrules {
+    {\bf Yo Joe!:} Once per game, the G.I. Joe player may invoke the battle cry
+    "Yo Joe!" (yes, the player must actually say it in an awesome and dramatic
+    fashion). For the remainder of the turn, the player may reroll all roles
+    (just once).
+  }
+\end{multicols*}
+
+\newpage
+
+\myarmytitle{Cobra}
+
+\UnitTable{
+  Trooper Squad (5)[3] & 5+ & 6+ & \makecell[l]{Infantry Rifles (6",
+  A5)} & Infantry, Slow, Tough(5) & A & 100pts\\
+  F.A.N.G. Section (1)[2] & 5+ & 5+ & \makecell[l]{Missiles (24", A1, Anti-Air,
+  AP(3), Deadly(3)), \\ 20mm Grenade Launcher (12", A2, Blast(3))\\ Bomb (6",
+  A1, Blast(6))} & Fast, Flying, Tough(3) & & 125pts\\
+  H.I.S.S. MkI Tank Section (1)[2] & 5+ & 3+ & ATGM system (42", A1, AP(3),
+  Deadly(3)) & Fast, Tough(6) & B & 215pts\\
+  H.I.S.S. MkI Transport Section (1)[2] & 5+ & 3+ & ATGM system (42", A1, AP(3), Deadly(3) & Fast, Tough(6), Transport(1) & C & 240pts\\
+  S.N.A.K.E. Squad (3)[3] & 5+ & 4+ & \makecell[l]{Machineguns (6",
+  A6), Flamethrowers (Adds Impact(3))} & Impact(3), Tough(6) &  & 250pts\\
+}
+
+\begin{multicols*}{3}[]
+  \UpgradeTable{
+    \multicolumn{2}{p{\dimexpr \linewidth - 2pt \relax}}
+    {\bf A | Upgrade with one of: } & \\
+    \makecell[l]{Hero - Cobra Commander\\ (Quality 4+, Fearless)} & +65pts \\
+    \makecell[l]{Hero - Destro (Defense 5+)} & +30pts \\
+    \makecell[l]{Hero - Major Bludd (Sniper)} & +25pts \\
+    {\bf Upgrade with: } & \\
+    Viper Glider (Ambush) & +10pts}
+
+
+  \UpgradeTable{
+    \multicolumn{2}{p{\dimexpr \linewidth - 2pt \relax}}
+    {\bf B | Replace any ATGM with: } & \\
+    \makecell[l]{Twin 90mm Cannon\\ (36", A2, AP(3), Deadly(3))} & +30pts \\
+    {\bf Upgrade all: } & \\
+    \makecell[l]{Drivers to Track-Vipers (Quality 4+)} & +40pts}
+
+
+  \UpgradeTable{
+    \multicolumn{2}{p{\dimexpr \linewidth - 2pt \relax}}
+    {\bf C | Replace any ATGM with: } & \\
+    \makecell[l]{Twin 30mm Cannon\\ (24", A4, AP(2), Deadly(3))} & +35pts \\
+    {\bf Upgrade all: } & \\
+    \makecell[l]{Drivers to Track-Vipers (Quality 4+)} & +40pts}
+
+  \specialrules {
+    {\bf Cobra!:} Once per game, the Cobra player may invoke the battle cry
+    "Cobra!" (yes, the player must actually say it in an awesome and dramatic
+    fashion). For the remainder of the turn, the player may reroll all roles
+    (just once).
+  }
+\end{multicols*}
+  
+\end{document}
